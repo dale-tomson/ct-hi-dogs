@@ -7,13 +7,13 @@ RUN pnpm install --frozen-lockfile
 COPY frontend/ ./
 RUN pnpm run build
 
-# Stage 2: Build the Go binary (with frontend dist already included)
+# Stage 2: Build the Go binary (with frontend dist from Stage 1)
 FROM golang:1.26-alpine AS go-builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
-# First copy the frontend dist from host  
-COPY frontend/dist ./frontend/dist
+# Copy built frontend dist from Stage 1
+COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 # Then copy all source code
 COPY . .
 RUN go build -o dogs-api .
