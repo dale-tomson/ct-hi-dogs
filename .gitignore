@@ -1,0 +1,32 @@
+# Go build output
+dogs-api
+dogs-api-local
+
+# SQLite files — never commit the database
+*.db
+*.db-shm
+*.db-wal
+
+# Environment variables
+.env
+.env.local
+
+# Frontend
+frontend/dist/
+frontend/node_modules/
+frontend/.next/
+frontend/build/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Go
+vendor/
+.gobin/

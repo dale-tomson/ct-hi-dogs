@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: dogs-api
+    runtime: go
+    buildCommand: >
+      corepack enable pnpm &&
+      cd frontend &&
+      pnpm install --frozen-lockfile &&
+      pnpm run build &&
+      cd .. &&
+      go build -o dogs-api .
+    startCommand: ./dogs-api
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: DB_PATH
+        value: /data/dogs.db
+      - key: API_KEY
+        generateValue: true     # Render generates a secure random string
+      - key: VITE_API_KEY
+        sync: false             # Must be set manually — see deployment note
+    disk:
+      name: dogs-db
+      mountPath: /data
+      sizeGB: 1

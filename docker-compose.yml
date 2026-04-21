@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      API_KEY: "dev-secret"
+      DB_PATH: "/data/dogs.db"
+    volumes:
+      - db_volume:/data
+
+volumes:
+  db_volume:
