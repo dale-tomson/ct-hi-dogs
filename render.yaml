@@ -19,7 +19,7 @@ services:
       - key: API_KEY
         generateValue: true     # Render generates a secure random string
       - key: VITE_API_KEY
-        sync: false             # Must be set manually — see deployment note
+        value: "${API_KEY}"     # Frontend uses the same secret from backend
     disk:
       name: dogs-db
       mountPath: /data
