@@ -5,8 +5,9 @@ services:
       - "8080:8080"
     environment:
       PORT: "8080"
-      API_KEY: "dev-secret"
+      API_KEY: ${API_KEY:-dev-secret}
       DB_PATH: "/data/dogs.db"
+      VITE_API_KEY: ${VITE_API_KEY:-dev-secret}
     volumes:
       - db_volume:/data
 
