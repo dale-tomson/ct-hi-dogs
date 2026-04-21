@@ -1,5 +1,7 @@
 # Stage 1: Build the React frontend
 FROM node:22-alpine AS frontend-builder
+ARG VITE_API_KEY
+ENV VITE_API_KEY=${VITE_API_KEY}
 RUN corepack enable pnpm
 WORKDIR /app/frontend
 COPY frontend/package.json frontend/pnpm-lock.yaml ./
